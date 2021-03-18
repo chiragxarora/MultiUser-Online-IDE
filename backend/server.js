@@ -6,24 +6,22 @@ const server = http.createServer(app);
 const socket = require("socket.io");
 const io = socket(server);
 
-app.use("/", express.static(__dirname + "/public"));
 io.on("connection", (socket) => {
-  console.log(socket.id);
+  console.log(socket.id); 
   socket.on("typing", (data) => {
     io.emit("typed", data);
   });
   socket.on("run", (data) => {
     let program = {
-      script: data.code,
+      code: data.code,
       language: data.lang,
-      versionIndex: "1",
-      clientId: "983ffeebe0cc8461ad533b8e4bc293c8",
-      clientSecret:
-        "82f737a93b6d5c7908074148cbe7cfd4e3511956a8802b8ed6b887c60c41c7f5",
+      input: '5'
     };
+    console.log(program.language + ' ' + data.lang)
+    console.log(program.language === data.lang)
     request(
       {
-        url: "https://api.jdoodle.com/v1/execute",
+        url: "https://codexweb.netlify.app/.netlify/functions/enforceCode",
         method: "POST",
         json: program,
       },
@@ -31,6 +29,9 @@ io.on("connection", (socket) => {
         console.log("error:", error);
         console.log("statusCode:", response && response.statusCode);
         console.log("body:", body);
+        io.emit('ans', {
+          output: body.output
+        })
       }
     );
   });

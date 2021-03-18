@@ -8,10 +8,15 @@ const fun = () => {
 document.getElementById('run').onclick = () => {
     socket.emit('run', {
         code: document.getElementById('code').value,
-        lang: 'nodejs'
+        lang: 'cpp',
+        input: ''
     })
 }
 
 socket.on('typed', (data) => {
     document.getElementById('code').value = data.text
+})
+
+socket.on('ans',(data) => {
+    document.getElementById('output').innerText = data.output
 })
