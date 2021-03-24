@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "ace-builds": "^1.4.12",
+    "node-sass": "^5.0.0",
     "react": "^16.14.0",
     "react-ace": "^9.3.0",
     "react-dom": "^16.14.0",
@@ -15,5 +16,10 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "autoprefixer": "^9.8.6",
+    "postcss": "^7.0.35",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.4"
   }
 }
