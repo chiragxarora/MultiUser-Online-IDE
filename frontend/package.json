@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "ace-builds": "^1.4.12",
+    "framer-motion": "^4.0.3",
     "node-sass": "^5.0.0",
     "react": "^16.14.0",
     "react-ace": "^9.3.0",
