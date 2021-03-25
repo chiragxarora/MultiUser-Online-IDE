@@ -16,10 +16,8 @@ io.on("connection", (socket) => {
     let program = {
       code: data.code,
       language: data.lang,
-      input: '5'
+      input: data.input
     };
-    console.log(program.language + ' ' + data.lang)
-    console.log(program.language === data.lang)
     request(
       {
         url: "https://codexweb.netlify.app/.netlify/functions/enforceCode",

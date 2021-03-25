@@ -1,5 +1,6 @@
 import React from "react";
-
+import { Dropdown } from "semantic-ui-react";
+import languages from "../utils/languages";
 //Styles
 
 import "../styles/app.css";
@@ -8,7 +9,7 @@ import "../styles/app.css";
 import * as ace from "ace-builds";
 import SocketIOClient from "socket.io-client";
 import "ace-builds/src-noconflict/mode-c_cpp";
-import "ace-builds/src-noconflict/theme-monokai";
+import "ace-builds/src-noconflict/theme-github";
 import AceEditor from "react-ace";
 
 const endpoint = "http://127.0.0.1:4676";
@@ -18,10 +19,14 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      codeValue: "",
+      codeValue: languages[0].template,
+      currentLang: languages[0].key,
     };
     this.codeEditor = React.createRef();
     this.fireTyping = this.fireTyping.bind(this);
+    this.onDDChange = this.onDDChange.bind(this);
+    this.runCode = this.runCode.bind(this);
+    this.handleOutput = this.handleOutput.bind(this);
   }
 
   componentDidMount() {
@@ -29,8 +34,11 @@ class App extends React.Component {
       this.setState({
         codeValue: data.text,
       });
-      console.log(this.codeEditor.current.editor.value);
     });
+    socket.on('ans',(data) => {
+      handleOutput(data.output)
+
+  })
   }
 
   fireTyping = () => {
@@ -40,39 +48,34 @@ class App extends React.Component {
     });
   };
 
+  onDDChange = (e, data) => {
+    const selectedVal = languages.filter((v) => v.key == data.value)
+    this.setState({currentLang : data.value, codeValue: selectedVal[0].template})
+  }
+
+  runCode = () => {
+    socket.emit('run', {
+      code: this.codeEditor.current.editor.getValue(),
+      lang: this.state.currentLang,
+      input: ''
+  })
+  }
+
+  handleOutput = () => {
+
+  }
+
   render() {
     return (
       <div>
-        <select
-          style={{ width: "10rem" }}
-          class="ui fluid search dropdown"
-          multiple=""
-        >
-          <option style={{ borderRadius: "10%" }} value={"c++"}>
-            C++
-          </option>
-          <option style={{ borderRadius: "1rem" }} value={"c"}>
-            C
-          </option>
-          <option style={{ borderRadius: "1rem" }} value={"cs"}>
-            C#
-          </option>
-          <option style={{ borderRadius: "1rem" }} value={"java"}>
-            Java
-          </option>
-          <option style={{ borderRadius: "1rem" }} value={"py"}>
-            Python 3
-          </option>
-          <option style={{ borderRadius: "1rem" }} value={"rb"}>
-            Ruby
-          </option>
-          <option style={{ borderRadius: "1rem" }} value={"kt"}>
-            Kotlin
-          </option>
-          <option style={{ borderRadius: "1rem" }} value={"swift"}>
-            Swift
-          </option>
-        </select>
+        <Dropdown
+          placeholder="Languages"
+          onChange = {this.onDDChange}
+          selection
+          value = {this.state.currentLang}
+          options={languages}
+        />
+
         <AceEditor
           style={{
             margin: "3rem auto",
@@ -82,13 +85,14 @@ class App extends React.Component {
           fontSize={18}
           ref={this.codeEditor}
           mode="c_cpp"
-          theme="monokai"
+          theme="github"
           value={this.state.codeValue}
           onInput={this.fireTyping}
-          showPrintMargin={true}
+          showPrintMargin={false}
           name="UNIQUE_ID_OF_DIV"
           editorProps={{ $blockScrolling: true }}
           setOptions={{
+            
             enableBasicAutocompletion: true,
             enableLiveAutocompletion: true,
             enableSnippets: true,
@@ -96,10 +100,11 @@ class App extends React.Component {
         />
         <div className="container">
           <button
+            onClick={this.runCode}
             style={{
               marginLeft: "40rem",
             }}
-            class="large ui teal button"
+            className="large ui teal button"
           >
             Run
           </button>
