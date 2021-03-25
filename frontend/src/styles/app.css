@@ -5,9 +5,22 @@
 }
 body {
   background: #444444c7;
+  overflow-y: 0;
 }
 
 #AceEditor {
   width: 10vw;
   height: 60vh;
+}
+
+button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dropdown {
+  border-radius: 2rem;
+  margin-top: 1rem;
+  margin-left: 1rem;
 }

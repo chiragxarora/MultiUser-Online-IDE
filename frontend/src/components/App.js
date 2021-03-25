@@ -43,10 +43,39 @@ class App extends React.Component {
   render() {
     return (
       <div>
+        <select
+          style={{ width: "10rem" }}
+          class="ui fluid search dropdown"
+          multiple=""
+        >
+          <option style={{ borderRadius: "10%" }} value={"c++"}>
+            C++
+          </option>
+          <option style={{ borderRadius: "1rem" }} value={"c"}>
+            C
+          </option>
+          <option style={{ borderRadius: "1rem" }} value={"cs"}>
+            C#
+          </option>
+          <option style={{ borderRadius: "1rem" }} value={"java"}>
+            Java
+          </option>
+          <option style={{ borderRadius: "1rem" }} value={"py"}>
+            Python 3
+          </option>
+          <option style={{ borderRadius: "1rem" }} value={"rb"}>
+            Ruby
+          </option>
+          <option style={{ borderRadius: "1rem" }} value={"kt"}>
+            Kotlin
+          </option>
+          <option style={{ borderRadius: "1rem" }} value={"swift"}>
+            Swift
+          </option>
+        </select>
         <AceEditor
           style={{
-            marginLeft: "8rem",
-            marginTop: "3rem",
+            margin: "3rem auto",
             width: "80vw",
             height: "70vh",
           }}
@@ -65,6 +94,16 @@ class App extends React.Component {
             enableSnippets: true,
           }}
         />
+        <div className="container">
+          <button
+            style={{
+              marginLeft: "40rem",
+            }}
+            class="large ui teal button"
+          >
+            Run
+          </button>
+        </div>
       </div>
     );
   }
