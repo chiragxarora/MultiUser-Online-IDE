@@ -8,7 +8,7 @@ const socket = require("socket.io");
 const { execPath } = require("process");
 const io = socket(server);
 
-const PORT = 4676 || process.env.PORT
+const port = 4676 || process.env.PORT
 
 app.use(express.static(path.join(__dirname, 'frontend/build')));
 
@@ -53,6 +53,6 @@ io.on("connection", (socket) => {
   });
 });
 
-server.listen(PORT, () => {
+server.listen(port, () => {
   console.log("server started at http://localhost:4676");
 });
