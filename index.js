@@ -18,9 +18,9 @@ app.get('*', (req, res) => {
 
 io.on("connection", (socket) => {
   console.log(socket.id);
-  io.on("typing", (data) => {
+  socket.on("typing", (data) => {
     console.log('typing')
-    socket.emit("typed", data);
+    io.emit("typed", data);
   });
   socket.on("run", (data) => {
     let program = {

@@ -34,16 +34,14 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-     if(check == true) {
       this.props.socket.on("typed", (data) => {
         console.log(35, data.text)
         this.setState({
-          codeValue: data.text,
+          codeValue: ld,
         });
         check = true;
         console.log(check)
       });
-    }
     
     this.props.socket.on('ans',(data) => {
       console.log(data.output)
@@ -54,6 +52,7 @@ class App extends React.Component {
 
   fireTyping = () => {
     ld = this.codeEditor.current.editor.getValue()
+    //console.log(ld)
     if(check) {
       console.log(48, this.codeEditor.current.editor.getValue(), check);
       this.props.socket.emit("typing", {
