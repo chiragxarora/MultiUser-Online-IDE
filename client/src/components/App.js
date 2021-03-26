@@ -6,15 +6,15 @@ import languages from "../utils/languages";
 import "../styles/app.css";
 
 //Editor
-import * as ace from "ace-builds";
-import SocketIOClient from "socket.io-client";
+ import * as ace from "ace-builds";
+// import SocketIOClient from "socket.io-client";
 import "ace-builds/src-noconflict/mode-c_cpp";
 import "ace-builds/src-noconflict/theme-github";
 import "ace-builds/src-noconflict/ext-language_tools";
 import AceEditor from "react-ace";
 
-const endpoint = "https://multiuseride.herokuapp.com/";
-const socket = SocketIOClient(endpoint, { transports: ["websocket"] });
+// const endpoint = "https://multiuseride.herokuapp.com/";
+// const socket = SocketIOClient(endpoint, { transports: ["websocket"] });
 
 class App extends React.Component {
   constructor(props) {

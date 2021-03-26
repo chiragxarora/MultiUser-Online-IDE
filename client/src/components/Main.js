@@ -15,22 +15,22 @@ class Main extends React.Component {
     }
   }
 
-  componentDidMount() {
-      console.log(this.props)
-      //this.fetchHash()
-      console.log(this.state.roomHash)
-  }
+  // componentDidMount() {
+  //     console.log(this.props)
+  //     //this.fetchHash()
+  //     console.log(this.state.roomHash)
+  // }
 
-  fetchHash = () => {
-    console.log('inside hash')
-    fetch("https://random.justyy.workers.dev/api/random/?cached&n=15")
-      .then((response) => response.json())
-      .then((data) => {
-        this.setState({
-          roomHash: data,
-        });
-      });
-  };
+  // fetchHash = () => {
+  //   console.log('inside hash')
+  //   fetch("https://random.justyy.workers.dev/api/random/?cached&n=15")
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       this.setState({
+  //         roomHash: data,
+  //       });
+  //     });
+  // };
   
   render() {
     return (

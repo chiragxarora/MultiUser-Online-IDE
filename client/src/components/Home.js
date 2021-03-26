@@ -8,16 +8,6 @@ const socket = SocketIOClient(endpoint, { transports: ["websocket"] });
 class Home extends React.Component {
   constructor(props) {
     super(props);
-    this.joinRoom = this.joinRoom.bind(this);
-  }
-
-  joinRoom = () => {
-    socket.emit("join", {
-      roomId: this.props.roomHash,
-    });
-  };
-
-  componentDidMount() {
   }
 
   render() {
