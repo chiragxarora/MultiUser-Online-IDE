@@ -13,8 +13,8 @@ import "ace-builds/src-noconflict/theme-github";
 import "ace-builds/src-noconflict/ext-language_tools";
 import AceEditor from "react-ace";
 
-// const endpoint = "https://multiuseride.herokuapp.com/";
-// const socket = SocketIOClient(endpoint, { transports: ["websocket"] });
+//  const endpoint = "https://multiuseride.herokuapp.com/";
+//  const socket = SocketIOClient(endpoint, { transports: ["websocket"] });
 
 class App extends React.Component {
   constructor(props) {
@@ -31,12 +31,12 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    socket.on("typed", (data) => {
+    this.props.socket.on("typed", (data) => {
       this.setState({
         codeValue: data.text,
       });
     });
-    socket.on('ans',(data) => {
+    this.props.socket.on('ans',(data) => {
       console.log(data.output)
       //handleOutput(data.output)
 
@@ -45,7 +45,7 @@ class App extends React.Component {
 
   fireTyping = () => {
     console.log();
-    socket.emit("typing", {
+    this.props.socket.emit("typing", {
       text: this.codeEditor.current.editor.getValue(),
     });
   };
@@ -56,7 +56,7 @@ class App extends React.Component {
   }
 
   runCode = () => {
-    socket.emit('run', {
+    this.props.socket.emit('run', {
       code: this.codeEditor.current.editor.getValue(),
       lang: this.state.currentLang,
       input: ''
