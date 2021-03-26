@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import SocketIOClient from "socket.io-client";
 import App from "./App";
 import Home from './Home';
-const endpoint = "https://multiuseride.herokuapp.com";
+const endpoint = "http://localhost:4676";
 const socket = SocketIOClient(endpoint, { transports: ["websocket"] });
 
 class Main extends React.Component {
