@@ -9,10 +9,14 @@ const io = socket(server);
 
 const port = process.env.PORT || 4676
 
-app.use(express.static(path.join(__dirname, 'client/build')))
+// app.use(express.static(path.join(__dirname, 'client/build')))
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname + '/client/build/index.html'))
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname + '/client/build/index.html'))
+// })
+
+app.get('/', (req, res) => {
+  res.send('hey')
 })
 
 io.on("connection", (socket) => {
