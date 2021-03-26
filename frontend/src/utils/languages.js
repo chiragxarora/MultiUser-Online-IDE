@@ -16,7 +16,7 @@ int main() {
     text: "C",
     template: `#include<stdio.h>
 int main() {
-    cout<<"Hello World";
+    printf("Hello World");
     return 0;
 }`,
   },
@@ -24,13 +24,17 @@ int main() {
     key: "java",
     value: "java",
     text: "JAVA",
-    template: ``,
+    template: `public class Main {
+    public static void main(String args[]) {
+        System.out.println("Hello World!");
+    }
+}`,
   },
   {
     key: "py",
     value: "py",
     text: "PYTHON 3",
-    template: ``,
+    template: `print("Hello World!")`,
   },
 ];
 

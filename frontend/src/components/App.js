@@ -10,6 +10,7 @@ import * as ace from "ace-builds";
 import SocketIOClient from "socket.io-client";
 import "ace-builds/src-noconflict/mode-c_cpp";
 import "ace-builds/src-noconflict/theme-github";
+import "ace-builds/src-noconflict/ext-language_tools";
 import AceEditor from "react-ace";
 
 const endpoint = "http://127.0.0.1:4676";
@@ -36,7 +37,8 @@ class App extends React.Component {
       });
     });
     socket.on('ans',(data) => {
-      handleOutput(data.output)
+      console.log(data.output)
+      //handleOutput(data.output)
 
   })
   }

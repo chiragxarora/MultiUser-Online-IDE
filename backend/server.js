@@ -7,7 +7,14 @@ const socket = require("socket.io");
 const io = socket(server);
 
 io.on("connection", (socket) => {
-  console.log(socket.id); 
+  console.log(socket.id);
+  socket.on('join', (data) => {
+    socket.join(data.roomId, () => {
+      io.to(data.roomId).emit('entered', {
+        roomId: data.roomId
+      })
+    })
+  })
   socket.on("typing", (data) => {
     console.log('typing')
     io.emit("typed", data);
