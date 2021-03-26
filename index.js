@@ -20,7 +20,7 @@ io.on("connection", (socket) => {
   console.log(socket.id);
   socket.on("typing", (data) => {
     console.log('typing')
-    io.emit("typed", data);
+    socket.emit("typed", data);
   });
   socket.on("run", (data) => {
     let program = {

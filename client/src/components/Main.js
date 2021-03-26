@@ -35,7 +35,7 @@ class Main extends React.Component {
     return (
       <Router>
         <Switch>
-          <Route exact path="/" component={() => <Home roomHash={this.state.roomHash} socket={socket} />}></Route>
+          <Route exact path="/" component={() => <Home roomHash={this.state.roomHash} />}></Route>
           <Route path={`/code/${this.state.roomHash}`} component={() => <App socket={socket} />}></Route>
         </Switch>
       </Router>

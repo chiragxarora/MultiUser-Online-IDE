@@ -7,13 +7,13 @@ import "../styles/app.css";
 
 //Editor
  import * as ace from "ace-builds";
-// import SocketIOClient from "socket.io-client";
+//  import SocketIOClient from "socket.io-client";
 import "ace-builds/src-noconflict/mode-c_cpp";
 import "ace-builds/src-noconflict/theme-github";
 import "ace-builds/src-noconflict/ext-language_tools";
 import AceEditor from "react-ace";
 
-//  const endpoint = "https://multiuseride.herokuapp.com/";
+//  const endpoint = "http://localhost:4676";
 //  const socket = SocketIOClient(endpoint, { transports: ["websocket"] });
 
 class App extends React.Component {
@@ -32,6 +32,7 @@ class App extends React.Component {
 
   componentDidMount() {
     this.props.socket.on("typed", (data) => {
+      console.log(123)
       this.setState({
         codeValue: data.text,
       });
@@ -44,7 +45,7 @@ class App extends React.Component {
   }
 
   fireTyping = () => {
-    console.log();
+    console.log(123444)
     this.props.socket.emit("typing", {
       text: this.codeEditor.current.editor.getValue(),
     });
