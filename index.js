@@ -15,12 +15,19 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname + '/client/build/index.html'))
 })
 
-
+let previousCode, currentCode;
 io.on("connection", (socket) => {
   console.log(socket.id);
   socket.on("typing", (data) => {
+    currentCode = data.text
     console.log('typing')
-    io.emit("typed", data);
+    console.log(previousCode === currentCode)
+    if(previousCode !== currentCode){
+      console.log(1)
+      io.emit("typed", data);
+      previousCode = currentCode;
+      currentCode = ''
+    }
   });
   socket.on("run", (data) => {
     let program = {
