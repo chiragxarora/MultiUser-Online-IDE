@@ -9,7 +9,6 @@ const socket = SocketIOClient(endpoint, { transports: ["websocket"] });
 class Main extends React.Component {
   constructor(props) {
     super(props);
-    this.fetchHash = this.fetchHash.bind(this);
     this.state = {
       roomHash: 'xyzabc'
     }
@@ -37,7 +36,7 @@ class Main extends React.Component {
       <Router>
         <Switch>
           <Route exact path="/" component={() => <Home roomHash={this.state.roomHash} socket={socket} />}></Route>
-          <Route path={`/code/${this.state.roomHash}`} component={App}></Route>
+          <Route path={`/code/${this.state.roomHash}`} component={() => <App socket={socket} />}></Route>
         </Switch>
       </Router>
     );
