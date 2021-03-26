@@ -13,7 +13,7 @@ import "ace-builds/src-noconflict/theme-github";
 import "ace-builds/src-noconflict/ext-language_tools";
 import AceEditor from "react-ace";
 
-const endpoint = "http://127.0.0.1:4676";
+const endpoint = "https://multiuseride.herokuapp.com/";
 const socket = SocketIOClient(endpoint, { transports: ["websocket"] });
 
 class App extends React.Component {

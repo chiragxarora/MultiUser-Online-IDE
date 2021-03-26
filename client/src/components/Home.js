@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Button } from "semantic-ui-react";
 import SocketIOClient from "socket.io-client";
-const endpoint = "http://127.0.0.1:4676";
+const endpoint = "https://multiuseride.herokuapp.com";
 const socket = SocketIOClient(endpoint, { transports: ["websocket"] });
 
 class Home extends React.Component {
