@@ -37,7 +37,7 @@ class App extends React.Component {
       this.props.socket.on("typed", (data) => {
         console.log(35, data.text)
         this.setState({
-          codeValue: ld,
+          codeValue: data.text,
         });
         check = true;
         console.log(check)
