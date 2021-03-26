@@ -18,7 +18,7 @@ app.get('*', (req, res) => {
 
 io.on("connection", (socket) => {
   console.log(socket.id);
-  socket.on("typing", (data) => {
+  io.on("typing", (data) => {
     console.log('typing')
     socket.emit("typed", data);
   });

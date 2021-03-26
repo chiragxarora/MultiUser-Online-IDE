@@ -13,6 +13,9 @@ import "ace-builds/src-noconflict/theme-github";
 import "ace-builds/src-noconflict/ext-language_tools";
 import AceEditor from "react-ace";
 
+let check = true;
+let ld;
+
 //  const endpoint = "http://localhost:4676";
 //  const socket = SocketIOClient(endpoint, { transports: ["websocket"] });
 
@@ -31,12 +34,17 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.props.socket.on("typed", (data) => {
-      console.log(123)
-      this.setState({
-        codeValue: data.text,
+     if(check == true) {
+      this.props.socket.on("typed", (data) => {
+        console.log(35, data.text)
+        this.setState({
+          codeValue: data.text,
+        });
+        check = true;
+        console.log(check)
       });
-    });
+    }
+    
     this.props.socket.on('ans',(data) => {
       console.log(data.output)
       //handleOutput(data.output)
@@ -45,10 +53,15 @@ class App extends React.Component {
   }
 
   fireTyping = () => {
-    console.log(123444)
-    this.props.socket.emit("typing", {
-      text: this.codeEditor.current.editor.getValue(),
-    });
+    ld = this.codeEditor.current.editor.getValue()
+    if(check) {
+      console.log(48, this.codeEditor.current.editor.getValue(), check);
+      this.props.socket.emit("typing", {
+        text: ld,
+      });
+      check = false;
+    }
+    console.log(check)
   };
 
   onDDChange = (e, data) => {
