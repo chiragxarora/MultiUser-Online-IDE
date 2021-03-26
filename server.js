@@ -3,8 +3,18 @@ const request = require("request");
 const app = express();
 const http = require("http");
 const server = http.createServer(app);
+const path = require('path')
 const socket = require("socket.io");
+const { execPath } = require("process");
 const io = socket(server);
+
+const PORT = 4676 || process.env.PORT
+
+app.use(express.static(path.join(__dirname, 'frontend/build')));
+
+app.get('*', (req,res) => {
+  res.sendFile(path.join(__dirname+'/frontend/build/index.html'));
+})
 
 io.on("connection", (socket) => {
   console.log(socket.id);
@@ -43,6 +53,6 @@ io.on("connection", (socket) => {
   });
 });
 
-server.listen(4676, () => {
+server.listen(PORT, () => {
   console.log("server started at http://localhost:4676");
 });
